@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Pracovní podklady – do produkce nepatří, loga jsou v index.html jako base64
+*.zip
+pr-advisory-logo*.png
+logo-full.png
+logo-cernobile.png
+moderni-logo.png
+barevne-schema.png
+
+# Alternativní designové varianty – nasazuje se pouze root
+verze2/
+verze3/
