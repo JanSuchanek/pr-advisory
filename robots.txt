@@ -1,4 +1,2 @@
 User-agent: *
-Allow: /
-
-Sitemap: https://pradvisory.cz/sitemap.xml
+Disallow: /

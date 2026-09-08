@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>P&amp;R Advisory — financování nákladní techniky, leasing, pojištění a nástavby</title>
 <meta name="description" content="Zprostředkujeme úvěr, leasing i pojištění pro nákladní dopravní techniku a poradíme s nástavbou na míru vašemu provozu. Volejte 774 837 837.">
+<meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="canonical" href="https://pradvisory.cz/">
 
@@ -227,9 +228,42 @@ section{padding-block:clamp(52px,7vw,84px)}
 .site-footer a:hover{color:var(--emerald)}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+#gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#0B1F4D 0%,#071539 100%);padding:24px}
+#gate .box{width:min(400px,100%);text-align:center;color:#fff;font-family:var(--body)}
+#gate .glyph{width:96px;aspect-ratio:384/338;margin:0 auto 22px;background:var(--logo) center/contain no-repeat}
+#gate h2{font-family:var(--display);font-weight:600;font-size:26px;margin:0 0 8px;color:#fff;letter-spacing:normal}
+#gate p{margin:0 0 22px;color:#B9C6DE;font-size:15px;line-height:1.5}
+#gate form{display:flex;gap:8px}
+#gate input{flex:1;padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.08);color:#fff;font-size:16px;outline:none}
+#gate input::placeholder{color:#8FA2C2}
+#gate input:focus{border-color:var(--lime);background:rgba(255,255,255,.13)}
+#gate button{padding:13px 22px;border-radius:999px;border:0;background:var(--emerald);color:#fff;
+  font-weight:600;font-size:16px;cursor:pointer}
+#gate button:hover{background:#0d8640}
+#gate .err{margin:14px 0 0;color:#FFB4B4;font-size:14px;min-height:20px}
+html:not(.unlocked){overflow:hidden}
+html:not(.unlocked) body>*:not(#gate){display:none!important}
+html.unlocked #gate{display:none}
 </style>
+<script>try{if(localStorage.getItem("prg")==="1")document.documentElement.classList.add("unlocked")}catch(e){}</script>
 </head>
 <body>
+
+<div id="gate" role="dialog" aria-modal="true" aria-label="Přístup k náhledu">
+  <div class="box">
+    <div class="glyph" aria-hidden="true"></div>
+    <h2>Náhled webu</h2>
+    <p>Stránka se právě dokončuje. Zadejte prosím heslo.</p>
+    <form id="gateForm" autocomplete="off">
+      <input id="gatePw" type="password" placeholder="Heslo" aria-label="Heslo" autocomplete="current-password">
+      <button type="submit">Vstoupit</button>
+    </form>
+    <p class="err" id="gateErr" role="alert"></p>
+  </div>
+</div>
 
 <header class="site-header">
   <div class="wrap bar">
@@ -466,6 +500,27 @@ section{padding-block:clamp(52px,7vw,84px)}
   ],
   "areaServed":"CZ"
 }
+</script>
+<script>
+(function(){
+  var K="cHJhZHZpc29yeTIwMjY=";
+  var f=document.getElementById("gateForm");
+  if(!f)return;
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var v=document.getElementById("gatePw").value;
+    if(btoa(unescape(encodeURIComponent(v)))===K){
+      try{localStorage.setItem("prg","1")}catch(err){}
+      document.documentElement.classList.add("unlocked");
+    }else{
+      document.getElementById("gateErr").textContent="Nesprávné heslo.";
+      document.getElementById("gatePw").select();
+    }
+  });
+  if(!document.documentElement.classList.contains("unlocked")){
+    document.getElementById("gatePw").focus();
+  }
+})();
 </script>
 </body>
 </html>
